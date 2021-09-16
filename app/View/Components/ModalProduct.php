@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 
 class ModalProduct extends Component
 {
+
     public $product;
     /**
      * Create a new component instance.
