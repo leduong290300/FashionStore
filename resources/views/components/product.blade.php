@@ -30,7 +30,10 @@
                 </div>
             </div>
         </div>
+    <!--Start Modal1 -->
+    <x-modal-product :product="$product"/>
+    <!--End Modal1 -->
     @endforeach
 </div>
-<!-- Modal1 -->
+
 

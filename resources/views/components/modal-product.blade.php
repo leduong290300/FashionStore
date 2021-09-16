@@ -1,5 +1,5 @@
-<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-    <div class="overlay-modal1 js-hide-modal1"></div>
+<div  class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+    <div class="overlay-modal1"></div>
     <div class="container">
         <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
             <button class="how-pos3 hov3 trans-04 js-hide-modal1">
@@ -13,35 +13,35 @@
                                 <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
                                 <div class="slick3 gallery-lb">
-                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/')}}">
+                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/'.$product->photos)}}">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{asset('storage/images/products/')}}" alt="">
+                                            <img  src="{{asset('storage/images/products/'.$product->photos)}}" alt="">
 
-                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/')}}">
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/'.$product->photos)}}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
                                         </div>
                                     </div>
 
-{{--                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/'.$product->photos)}}">--}}
-{{--                                        <div class="wrap-pic-w pos-relative">--}}
-{{--                                            <img src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}">--}}
+                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/'.$product->photos)}}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img  src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}">
 
-{{--                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/'.$product->photos)}}">--}}
-{{--                                                <i class="fa fa-expand"></i>--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/'.$product->photos)}}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
 
-{{--                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/'.$product->photos)}}">--}}
-{{--                                        <div class="wrap-pic-w pos-relative">--}}
-{{--                                            <img src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}">--}}
+                                    <div class="item-slick3" data-thumb="{{asset('storage/images/products/'.$product->photos)}}">
+                                        <div class="wrap-pic-w pos-relative">
+                                            <img  src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}">
 
-{{--                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/'.$product->photos)}}">--}}
-{{--                                                <i class="fa fa-expand"></i>--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="{{asset('storage/images/products/'.$product->photos)}}">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             </h4>
 
                             <span class="mtext-106 cl2">
-								${{$product->price}}
+                                {{$product->price}}$
 							</span>
 
                             <p class="stext-102 cl3 p-t-23">

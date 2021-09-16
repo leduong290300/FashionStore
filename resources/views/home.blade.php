@@ -29,7 +29,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url('/assets/vendor/MagnificPopup/magnific-popup.css')}}">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{'/assets/vendor/perfect-scrollbar/perfect-scrollbar.css'}}">
+    <link rel="stylesheet" type="text/css" href="{{url('/assets/vendor/perfect-scrollbar/perfect-scrollbar.css')}}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url('/assets/css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('/assets/css/main.css')}}">
@@ -85,11 +85,6 @@
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 </div>
-
-<!-- Modal1 -->
-{{--@for ($product = 0; $product<count($products); $product++)--}}
-{{--    <x-modal-product :product="$product"/>--}}
-{{--@endfor--}}
 
 
 
