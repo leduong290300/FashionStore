@@ -99,7 +99,7 @@
             }
 
             $('.sub-menu-m').each(function(){
-                if($(this).css('display') == 'block') {
+                if($(this).css('display') == 'block') { console.log('hello');
                     $(this).css('display','none');
                     $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
                 }
@@ -290,3 +290,8 @@ for (let y =0; y<buttonCloseModal.length; y++) {
         modal[y].classList.remove('show-modal1')
     }
 }
+
+/*
+* Custom active class menu
+*
+* */
