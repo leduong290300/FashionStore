@@ -74,7 +74,11 @@ class ProductsController extends Controller
     public function show($id)
     {
         $item = Products::all()->find($id);
-       return view('pages.shops_details',['item' => $item]);
+        $categories = Categories::all();
+       return view('pages.shops_details',[
+           'item' => $item,
+           'categories' => $categories
+       ]);
     }
 
     /**

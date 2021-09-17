@@ -1,35 +1,35 @@
 <header class="header-v4">
     <!-- Header desktop -->
     <div class="container-menu-desktop">
-
         <div class="wrap-menu-desktop how-shadow1">
             <nav class="limiter-menu-desktop container">
 
                 <!-- Logo desktop -->
-                <a href="" class="logo">
-                    <img src="{{url('/assets/images/icons/logo-01.png')}}" alt="IMG-LOGO">
+                <a href="#" class="logo">
+                    <img src="{{url('assets/images/icons/logo-01.png')}}" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('home')}}">Home</a>
                         </li>
 
-                        <li class="active-menu">
+                        <li class="menu-items">
                             <a href="{{route('shops')}}">Shop</a>
                         </li>
 
-                        <li>
+
+                        <li class="menu-items">
                             <a href="{{route('blog')}}">Blog</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('about')}}">About</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('contact')}}">Contact</a>
                         </li>
                     </ul>
@@ -57,7 +57,7 @@
     <div class="wrap-header-mobile">
         <!-- Logo moblie -->
         <div class="logo-mobile">
-            <a href=""><img src="{{url('/assets/images/icons/logo-01.png')}}" alt="IMG-LOGO"></a>
+            <a href=""><img src="{{url('assets/images/icons/logo-01.png')}}" alt="IMG-LOGO"></a>
         </div>
 
         <!-- Icon header -->
@@ -86,10 +86,10 @@
 
     <!-- Menu Mobile -->
     <div class="menu-mobile">
-
         <ul class="main-menu-m">
             <li>
                 <a href="{{route('home')}}">Home</a>
+
                 <span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>

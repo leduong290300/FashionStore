@@ -99,7 +99,7 @@
             }
 
             $('.sub-menu-m').each(function(){
-                if($(this).css('display') == 'block') { console.log('hello');
+                if($(this).css('display') == 'block') {
                     $(this).css('display','none');
                     $(arrowMainMenu).removeClass('turn-arrow-main-menu-m');
                 }
@@ -283,7 +283,6 @@ for (let i =0; i<buttonShowModal.length; i++) {
         modal[i].classList.add('show-modal1');
     }
 }
-console.log(buttonCloseModal)
 
 for (let y =0; y<buttonCloseModal.length; y++) {
     buttonCloseModal[y].onclick = function(e) {

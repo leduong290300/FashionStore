@@ -13,23 +13,23 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li class="active-menu">
+                        <li class="menu-items">
                             <a href="{{route('home')}}">Home</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href={{route('shops')}}>Shop</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('blog')}}">Blog</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('about')}}">About</a>
                         </li>
 
-                        <li>
+                        <li class="menu-items">
                             <a href="{{route('contact')}}}">Contact</a>
                         </li>
                     </ul>
