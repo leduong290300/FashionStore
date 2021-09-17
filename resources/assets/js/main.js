@@ -283,7 +283,6 @@ for (let i =0; i<buttonShowModal.length; i++) {
         modal[i].classList.add('show-modal1');
     }
 }
-console.log(buttonCloseModal)
 
 for (let y =0; y<buttonCloseModal.length; y++) {
     buttonCloseModal[y].onclick = function(e) {
@@ -291,3 +290,8 @@ for (let y =0; y<buttonCloseModal.length; y++) {
         modal[y].classList.remove('show-modal1')
     }
 }
+
+/*
+* Custom active class menu
+*
+* */

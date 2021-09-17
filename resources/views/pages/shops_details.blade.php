@@ -2,7 +2,7 @@
 @section('page','Product Details')
 
 @section('breadcrumb')
-    <x-breadcrumb/>
+    <x-breadcrumb :item="$item"/>
 @endsection
 
 @section('content')

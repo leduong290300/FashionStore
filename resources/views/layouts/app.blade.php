@@ -53,7 +53,7 @@
 @yield('related_products')
 
 <!-- Footer -->
-<x-footer/>
+<x-footer :categories="$categories"/>
 
 
 <!-- Back to top -->
@@ -63,10 +63,6 @@
 		</span>
 </div>
 
-<!-- Modal1 -->
-{{--@foreach($products as $productModal)--}}
-{{--    <x-modal-product :productModal="$productModal"/>--}}
-{{--@endforeach--}}
 
 <!--===============================================================================================-->
 <script src="{{url('/assets/vendor/jquery/jquery-3.2.1.min.js')}}"></script>

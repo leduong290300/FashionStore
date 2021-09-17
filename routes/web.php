@@ -7,6 +7,7 @@ use App\Http\Controllers\PhotoSliderController;
 use App\Http\Controllers\PhotoBannerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\SearchController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,8 @@ Route::resource('products',ProductsController::class);
 //Shop
 Route::get('/shops',[ShopController::class,'index'])->name('shops');
 
+//Search
+Route::get('/search',[SearchController::class,'show'])->name('search');
 
 Route::get('/about', function () {
     return view('pages.about');
