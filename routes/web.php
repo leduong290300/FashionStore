@@ -8,6 +8,9 @@ use App\Http\Controllers\PhotoBannerController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LogoutController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +42,17 @@ Route::get('/shops',[ShopController::class,'index'])->name('shops');
 //Search
 Route::get('/search',[SearchController::class,'show'])->name('search');
 
+//Login
+Route::get('/account',[LoginController::class,'index'])->name('index');
+Route::post('/account/login',[LoginController::class,'login'])->name('login');
+
+//Register
+Route::get('/account/register',[RegisterController::class,'create'])->name('create');
+Route::post('/account',[RegisterController::class,'register'])->name('register');
+
+//Logout
+Route::post('/account/logout',[LogoutController::class,'logout'])->name('logout');
+
 Route::get('/about', function () {
     return view('pages.about');
 })->name('about');
@@ -65,7 +79,7 @@ Route::get('/shoping_cart', function () {
 
 Route::get('/dashboard', function () {
     return view ('dashboard');
-})->name('dashboard');
+})->name('dashboard')->middleware('admin');
 
 
 
