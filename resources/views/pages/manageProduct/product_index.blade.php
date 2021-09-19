@@ -1,4 +1,5 @@
 @extends('layouts.board')
+
 @section('breadcrumbs')
     <x-breadcrumbs-board/>
 @endsection
@@ -22,6 +23,7 @@
                         <th>Description 1</th>
                         <th>Description 2</th>
                         <th>Category</th>
+                        <th>Code</th>
                         <th>Image</th>
                         <th>Action</th>
                     </tr>
@@ -30,7 +32,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>
-                            {{$product->id}}
+                            {{$loop->index+1}}
                             </td>
                             <td>
                                 {{$product->name}}
@@ -65,7 +67,7 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{route('products.edit',['id' => $product->id])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
                                         Update
@@ -84,6 +86,8 @@
                 </table>
             </div>
         </div>
-        <div class="card-footer small text-muted"></div>
+        <div class="card-footer small text-muted">
+            {{$products->links('vendor.pagination.custom')}}
+        </div>
     </div>
 @endsection

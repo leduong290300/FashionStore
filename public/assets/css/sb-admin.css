@@ -306,7 +306,6 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
   -webkit-transform: rotate(15deg);
   -ms-transform: rotate(15deg);
   transform: rotate(15deg); }
-
 @media (min-width: 576px) {
   .card-columns {
     column-count: 1; } }

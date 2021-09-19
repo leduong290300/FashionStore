@@ -15,7 +15,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::all();
+        $products = Products::paginate(3);
         return view('pages.manageProduct.product_index',['products' => $products]);
     }
 
@@ -89,7 +89,7 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-
+    dd($id);
     }
 
     /**
