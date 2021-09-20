@@ -19,7 +19,8 @@
     <!--===============================================================================================-->
     <!-- Custom styles for this template-->
     <link href="{{url('/assets/css/sb-admin.css')}}" rel="stylesheet">
-    <!--===============================================================================================-->
+    <!--Custom paginate css-->
+    <link href="{{url('/assets/css/pagination.css')}}" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">

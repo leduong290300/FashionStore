@@ -4,6 +4,7 @@ namespace App\Http\Middleware\Admin;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Authenticate
 {
@@ -16,8 +17,8 @@ class Authenticate
      */
     public function handle(Request $request, Closure $next)
     {
-        $currentAdmin = auth()->user();
-        if($currentAdmin->email == 'admin@gmail.com')
+
+        if(Auth::check())
         {
             return $next($request);
         }

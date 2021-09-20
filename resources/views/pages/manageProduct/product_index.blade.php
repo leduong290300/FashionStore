@@ -67,13 +67,13 @@
                                 </div>
                             </td>
                             <td>
-                                <a href="{{route('products.edit',['id' => $product->id])}}">
+                                <a href="{{route('products.edit',['product' => $product])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
                                         Update
                                     </button>
                                 </a>
-                                <a href="">
+                                <a data-toggle="modal" data-target="#modalDelete-{{$product->id}}">
                                     <button class="btn btn-danger">
                                         <i class="fa fa-remove"></i>
                                         Delete
@@ -81,13 +81,14 @@
                                 </a>
                             </td>
                         </tr>
+
+                        {{--Delete Modal--}}
+                        <x-delete-modal :product="$product"/>
                     @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="card-footer small text-muted">
-            {{$products->links('vendor.pagination.custom')}}
-        </div>
+        {{$products->links('vendor.pagination.custom')}}
     </div>
 @endsection
