@@ -89,7 +89,12 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-    dd($id);
+        $product = Products::find($id);
+        $categories = Categories::all();
+        return view('pages.manageProduct.product_edit',[
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -101,7 +106,21 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $image = $request->file('product')->getClientOriginalName();
+        $product = Products::find($id);
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->size = $request->size;
+        $product->color = $request->color;
+        $product->quanlity = $request->quanlity;
+        $product->description1 = $request->description1;
+        $product->description2 = $request->description2;
+        $product->category = $request->category;
+        $product->photos = $image;
+        $request->file('product')->storeAs('public/images/products',$image);
+        $product->code = $request->code;
+        $product->save();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -112,6 +131,8 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::find($id);
+        $product->delete();
+        return back();
     }
 }
