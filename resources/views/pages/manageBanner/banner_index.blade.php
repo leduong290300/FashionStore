@@ -4,6 +4,22 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success hidden" role="alert">
+            <div class="d-flex align-items-center justify-content-between">
+                {{session('success')}}
+                <i class="fa fa-close btn-hidden"></i>
+            </div>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger hidden" role="alert">
+            <div class="d-flex align-items-center justify-content-between">
+                {{session('error')}}
+                <i class="fa fa-close btn-hidden"></i>
+            </div>
+        </div>
+    @endif
     <div class="card mb-3">
         <div class="card-header">
             <i class="fa fa-table"></i>
@@ -44,18 +60,21 @@
                                 {{$banner->name}}
                             </td>
                             <td>
-                                <a href="">
+                                <a href="{{route('banner.edit',['banner' => $banner])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
                                         Update
                                     </button>
                                 </a>
-                                <a href="">
-                                    <button class="btn btn-danger">
-                                        <i class="fa fa-remove"></i>
-                                        Delete
-                                    </button>
-                                </a>
+                                <button
+                                    class="btn btn-danger confirm"
+                                    data-toggle="modal"
+                                    data-target="#modalDelete"
+                                    data-url="{{route('banner.destroy',['banner' => $banner])}}"
+                                >
+                                    <i class="fa fa-remove"></i>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     @endforeach

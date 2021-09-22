@@ -6,15 +6,14 @@ use Illuminate\View\Component;
 
 class DeleteModal extends Component
 {
-    public $product;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($product)
+    public function __construct()
     {
-        $this->product = $product;
+
     }
 
     /**

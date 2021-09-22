@@ -46,6 +46,9 @@
     <!-- Logout Modal-->
     <x-logout-modal-board/>
 
+    {{--Delete Modal--}}
+    <x-delete-modal/>
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{url('/assets/vendor/jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{url('/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
@@ -54,8 +57,10 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{url('/assets/js/sb-admin.min.js')}}"></script>
-
+    {{-- Handle modal --}}
+    <script src='{{url('/assets/js/handle_modal.js')}}'></script>
+    {{--Handle alert--}}
+    <script src='{{url('/assets/js/handle_alert.js')}}'></script>
 </div>
 </body>
-
 </html>

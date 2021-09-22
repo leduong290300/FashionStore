@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\PhotoSliders;
 
 class PhotoSliderController extends Controller
@@ -14,7 +15,7 @@ class PhotoSliderController extends Controller
      */
     public function index()
     {
-        $sliders = PhotoSliders::all();
+        $sliders = PhotoSliders::paginate(10);
         return view('pages.manageSlider.slider_index',['sliders' => $sliders]);
     }
 
@@ -48,8 +49,19 @@ class PhotoSliderController extends Controller
         $slider->description = $description;
         $slider->size = $size;
         $slider->type = $type;
-        $slider->save();
-        return back();
+        try
+        {
+            $success = 'Add slider success';
+            $slider->save();
+            return back()->with('success',$success);
+        }
+        catch (\Exception $e)
+        {
+         \Log::error($e);
+         $error = 'Add slider fail';
+        }
+        return back()->with('error',$error);
+
     }
 
     /**
@@ -71,7 +83,10 @@ class PhotoSliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = PhotoSliders::findOrFail($id);
+        return view('pages.manageSlider.slider_edit',[
+            'slider' => $slider
+        ]);
     }
 
     /**
@@ -83,7 +98,64 @@ class PhotoSliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $slider = PhotoSliders::findOrFail($id);
+        $titleOld = $slider->title;
+        $descriptionOld = $slider->description;
+        $titleNew = $request->title;
+        $descriptionNew = $request->description;
+
+        /*Case 1:Update photo slider - Not update title,description*/
+        if($titleNew == null && $descriptionNew == null)
+        {
+            $sizeNew = $request->file('slider')->getSize();
+            $typeNew = $request->file('slider')->getMimeType();
+            $imageNew = $request->file('slider')->getClientOriginalName();
+            $request->file('slider')->storeAs('public/images/slider',$imageNew);
+            $titleNew = $titleOld;
+            $descriptionNew = $descriptionOld;
+            try
+            {
+                $msgSuccess = 'Update slider success';
+                $slider->title = $titleNew;
+                $slider->description = $descriptionNew;
+                $slider->name = $imageNew;
+                $slider->size = $sizeNew;
+                $slider->type = $typeNew;
+                $slider->save();
+                return redirect()
+                    ->route('slider.index')
+                    ->with('success',$msgSuccess);
+            } catch (\Exception $e)
+            {
+                \Log::error($e);
+            }
+            $msgFail = 'Update slider fail';
+            return redirect()
+                ->route('slider.index')
+                ->with('error',$msgFail);
+        };
+        /*Case 2:Update title,description - Dont update photo*/
+        if($request->file('slider') == null)
+        {
+           try
+           {
+               $msgSuccess = 'Update slider success';
+               $slider->title = $titleNew;
+               $slider->description = $descriptionNew;
+               $slider->save();
+               return redirect()
+                   ->route('slider.index')
+                   ->with('success',$msgSuccess);
+           }
+           catch (\Exception $e)
+           {
+               \Log::error($e);
+           }
+            $msgFail = 'Update slider fail';
+            return redirect()
+                ->route('slider.index')
+                ->with('error',$msgFail);
+        }
     }
 
     /**
@@ -94,6 +166,21 @@ class PhotoSliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $slider = PhotoSliders::findOrFail($id);
+        try
+        {
+            $slider->delete();
+            Storage::delete('public/images/slider/'.$slider->name);
+            $success = 'Delete slider success';
+            return redirect()->route('slider.index')
+                ->with('success',$success);
+        }
+        catch (\Exception $e)
+        {
+            \Log::error($e);
+            $error = 'Delete slider fail';
+        }
+        return redirect()->route('slider.index')
+            ->with('error',$error);
     }
 }
