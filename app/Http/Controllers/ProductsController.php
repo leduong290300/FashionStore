@@ -60,8 +60,17 @@ class ProductsController extends Controller
         $products->category = $category;
         $products->photos = $image;
         $products->code = $code;
-        $products->save();
-        return back();
+        try {
+            $products->save();
+            $msgSuccess = 'Post product success';
+            return back()
+                ->with('success',$msgSuccess);
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+        $msgFail = 'Post product failed';
+        return back()
+            ->with('error',$msgFail);
 
     }
 
@@ -107,7 +116,8 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $image = $request->file('product')->getClientOriginalName();
-        $product = Products::find($id);
+        $request->file('product')->storeAs('public/images/products',$image);
+        $product = Products::findOrFail($id);
         $product->name = $request->name;
         $product->price = $request->price;
         $product->size = $request->size;
@@ -117,10 +127,18 @@ class ProductsController extends Controller
         $product->description2 = $request->description2;
         $product->category = $request->category;
         $product->photos = $image;
-        $request->file('product')->storeAs('public/images/products',$image);
         $product->code = $request->code;
-        $product->save();
-        return redirect()->route('products.index');
+        try {
+            $product->save();
+            $msgSuccess = 'Update product success';
+            return redirect()->route('products.index')
+            ->with('success',$msgSuccess);
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+        $msgFail = 'Update product failed';
+        return redirect()->route('products.index')
+            ->with('error',$msgFail);
     }
 
     /**
@@ -131,8 +149,20 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Products::find($id);
-        $product->delete();
-        return back();
+        $product = Products::findOrFail($id);
+        try
+        {
+            $product->delete();
+            $success = 'Delete product success';
+            return redirect()->route('products.index')
+                ->with('success',$success);
+        } catch (\Exception $e)
+        {
+            \Log::error($e);
+            $error = 'Delete product fail';
+        }
+        return redirect()->route('products.index')
+            ->with('error',$error);
+
     }
 }

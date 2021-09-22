@@ -5,6 +5,16 @@
 @endsection
 
 @section('content')
+    @if (session('success'))
+        <div class="alert alert-success display" role="alert">
+            {{session('success')}}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger display" role="alert">
+            {{session('error')}}
+        </div>
+    @endif
     <div class="card mb-3">
         <div class="card-header">
             <i class="fa fa-table"></i>
@@ -32,7 +42,7 @@
                     @foreach($products as $product)
                         <tr>
                             <td>
-                            {{$loop->index+1}}
+                            {{ $loop->iteration + ($products->currentPage()-1) * ($products->perPage()) }}
                             </td>
                             <td>
                                 {{$product->name}}
@@ -73,17 +83,16 @@
                                         Update
                                     </button>
                                 </a>
-                                <a data-toggle="modal" data-target="#modalDelete-{{$product->id}}">
-                                    <button class="btn btn-danger">
-                                        <i class="fa fa-remove"></i>
-                                        Delete
-                                    </button>
-                                </a>
+                                <button class="btn btn-danger confirm"
+                                        data-toggle="modal"
+                                        data-target="#modalDelete"
+                                        data-url="{{route('products.destroy',['product' => $product->id])}}"
+                                        >
+                                    <i class="fa fa-remove"></i>
+                                    Delete
+                                </button>
                             </td>
                         </tr>
-
-                        {{--Delete Modal--}}
-                        <x-delete-modal :product="$product"/>
                     @endforeach
                     </tbody>
                 </table>
