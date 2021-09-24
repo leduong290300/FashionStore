@@ -19,22 +19,56 @@
             </div>
         </div>
     @endif
-    <form method="POST" action="{{route('slider.store')}}" enctype="multipart/form-data">
+    <h4>Add slider</h4>
+    <form method="POST" action="" id="form-slider" enctype="multipart/form-data">
         @csrf
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" placeholder="Enter title" name="title">
+        <div class="form-group mt-4">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Title"
+                   id="title"
+                   name="title"
+            >
         </div>
         <div class="form-group">
-            <label>Description</label>
-            <input type="text" class="form-control" placeholder="Enter description" name="description">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Description"
+                   id="description"
+                   name="description"
+            >
         </div>
         <div class="form-group">
-            <label>Photo Slider</label>
-            <input type="file" class="form-control-file" name="slider">
+            <textarea id="slider" class="form-control" name="slider"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button
+            class="btn btn-primary mt-4"
+            type="submit"
+        >
             <i class="fa fa-save"></i>
-            Save</button>
+            Save
+        </button>
+
     </form>
+
+
+
+<!-- {{--    <form method="POST" action="{{route('slider.store')}}" enctype="multipart/form-data">--}}
+{{--        @csrf--}}
+{{--        <div class="form-group">--}}
+{{--            <label>Title</label>--}}
+{{--            <input type="text" class="form-control" placeholder="Enter title" name="title">--}}
+{{--        </div>--}}
+{{--        <div class="form-group">--}}
+{{--            <label>Description</label>--}}
+{{--            <input type="text" class="form-control" placeholder="Enter description" name="description">--}}
+{{--        </div>--}}
+{{--        <div class="form-group">--}}
+{{--            <label>Photo Slider</label>--}}
+{{--            <input type="file" class="form-control-file" name="slider">--}}
+{{--        </div>--}}
+{{--        <button type="submit" class="btn btn-primary">--}}
+{{--            <i class="fa fa-save"></i>--}}
+{{--            Save</button>--}}
+{{--    </form>--}} -->
 @endsection

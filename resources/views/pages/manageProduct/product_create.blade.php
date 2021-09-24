@@ -43,11 +43,11 @@
         </div>
         <div class="form-group">
             <label>Description 1</label>
-            <input type="text" class="form-control" placeholder="Enter description1" name="description1">
+            <textarea id="descriptionProduct1" rows="10" class="form-control" placeholder="Enter description1" name="description1"></textarea>
         </div>
         <div class="form-group">
             <label>Description 2</label>
-            <input type="text" class="form-control" placeholder="Enter description2" name="description2">
+            <textarea id="descriptionProduct2" rows="10" class="form-control" placeholder="Enter description2" name="description2"></textarea>
         </div>
         <div class="col-auto mb-4">
             <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
@@ -72,4 +72,46 @@
             <i class="fa fa-save"></i>
             Save</button>
     </form>
+{{--    <div class="row">--}}
+{{--        <div class="col-lg-9">--}}
+{{--            <div class="form-group">--}}
+{{--                <input type="text" class="form-control" placeholder="Enter name product" name="name">--}}
+{{--            </div>--}}
+{{--            <div id="content-long"></div>--}}
+{{--            <label style="margin-top:10px">Content short</label>--}}
+{{--            <div id="content-short"></div>--}}
+{{--        </div>--}}
+{{--        <div class="col-lg-3">--}}
+
+{{--            <div class="form-group">--}}
+{{--                <label>Price</label>--}}
+{{--                <input type="text" class="form-control" placeholder="Enter price" name="price">--}}
+{{--            </div>--}}
+{{--            <div class="form-group">--}}
+{{--                <label>Size</label>--}}
+{{--                <input type="text" class="form-control" placeholder="Enter size" name="size">--}}
+{{--            </div>--}}
+{{--            <div class="form-group">--}}
+{{--                <label>Color</label>--}}
+{{--                <input type="text" class="form-control" placeholder="Enter color" name="color">--}}
+{{--            </div>--}}
+{{--            <div class="form-group">--}}
+{{--                <label>Quanlity</label>--}}
+{{--                <input type="text" class="form-control" placeholder="Enter quanlity" name="quanlity">--}}
+{{--            </div>--}}
+{{--            <div class="form-group">--}}
+{{--                <label>Code</label>--}}
+{{--                <input type="text" class="form-control" placeholder="Enter code" name="code">--}}
+{{--            </div>--}}
+{{--            <div class="col-auto mb-4">--}}
+{{--                <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>--}}
+{{--                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="category">--}}
+{{--                    <option selected>Choose...</option>--}}
+{{--                    @foreach($categories as $category)--}}
+{{--                        <option  value="{!!$category->name!!}">{!!$category->name!!}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection

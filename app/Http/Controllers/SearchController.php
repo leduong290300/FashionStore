@@ -20,16 +20,5 @@ class SearchController extends Controller
         'resultSearch' =>$resultOfSearch,
         'categories' => $categories
     ]);
-//    if(count($products) > 0) {
-//        return view('pages.search',[
-//            'products' => $products,
-//            'resultSearch' =>$resultOfSearch,
-//            'categories' => $categories
-//        ]);
-//    }
-//    else {
-//      return "Product not found";
-//    }
-
     }
 }
