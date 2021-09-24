@@ -70,10 +70,18 @@
     "/assets/images/thumb-02.jpg": "/assets/images/thumb-02.jpg",
     "/assets/images/thumb-03.jpg": "/assets/images/thumb-03.jpg",
     "/assets/js/handle_alert.js": "/assets/js/handle_alert.js",
+    "/assets/js/handle_board.js": "/assets/js/handle_board.js",
     "/assets/js/handle_modal.js": "/assets/js/handle_modal.js",
     "/assets/js/main.js": "/assets/js/main.js",
     "/assets/js/map-custom.js": "/assets/js/map-custom.js",
     "/assets/js/sb-admin.js": "/assets/js/sb-admin.js",
     "/assets/js/sb-admin.min.js": "/assets/js/sb-admin.min.js",
-    "/assets/js/slick-custom.js": "/assets/js/slick-custom.js"
+    "/assets/js/slick-custom.js": "/assets/js/slick-custom.js",
+    "/assets/ckfinder/CHANGELOG.html": "/assets/ckfinder/CHANGELOG.html",
+    "/assets/ckfinder/LICENSE.html": "/assets/ckfinder/LICENSE.html",
+    "/assets/ckfinder/README.html": "/assets/ckfinder/README.html",
+    "/assets/ckfinder/ckfinder.html": "/assets/ckfinder/ckfinder.html",
+    "/assets/ckfinder/ckfinder.js": "/assets/ckfinder/ckfinder.js",
+    "/assets/ckfinder/config.js": "/assets/ckfinder/config.js",
+    "/assets/ckfinder/config.php": "/assets/ckfinder/config.php"
 }

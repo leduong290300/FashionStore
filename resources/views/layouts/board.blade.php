@@ -46,7 +46,7 @@
     <!-- Logout Modal-->
     <x-logout-modal-board/>
 
-    {{--Delete Modal--}}
+    <!-- {{--Delete Modal--}} -->
     <x-delete-modal/>
 
     <!-- Bootstrap core JavaScript-->
@@ -60,7 +60,19 @@
     {{-- Handle modal --}}
     <script src='{{url('/assets/js/handle_modal.js')}}'></script>
     {{--Handle alert--}}
-    <script src='{{url('/assets/js/handle_alert.js')}}'></script>
+    <!-- <script src='{{url('/assets/js/handle_alert.js')}}'></script> -->
+    <!-- Ckeditor -->
+    <script src="{{url('/assets/ckeditor/ckeditor.js')}}"></script>
+    <script>
+      CKEDITOR.replace('slider',{
+        height:500,
+        filebrowserUploadUrl:'{{route('slider.store',['_token' => csrf_token() ])}}',
+        filebrowserUploadMethod : 'form'
+      })
+    </script>
+    {{--Custom js--}}
+    <!-- <script src="{{url('/assets/js/handle_board.js')}}"></script> -->
+
 </div>
 </body>
 </html>
