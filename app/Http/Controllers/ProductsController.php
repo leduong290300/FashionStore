@@ -5,9 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Products;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
+    protected $productModels;
+    public function __construct(Products $product)
+    {
+        $this->productModels = $product;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,37 +45,30 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->name;
-        $price = $request->price;
-        $size = $request->size;
-        $color = $request->color;
-        $quanlity = $request->quanlity;
-        $description1 = $request->description1;
-        $description2 = $request->description2;
-        $category = $request->category;
-        $code = $request->code;
-        $image = $request->file('product')->getClientOriginalName();
-        $request->file('product')->storeAs('public/images/products',$image);
+        $data = $request->all();
         $products = new Products();
-        $products->name = $name;
-        $products->price = $price;
-        $products->size = $size;
-        $products->color = $color;
-        $products->quanlity = $quanlity;
-        $products->description1 = $description1;
-        $products->description2 = $description2;
-        $products->category = $category;
-        $products->photos = $image;
-        $products->code = $code;
+        $products->name = $data['name'];
+        $products->price = $data['price'];
+        $products->size = $data['size'];
+        $products->color = $data['color'];
+        $products->quanlity = $data['quanlity'];
+        $products->description1 = $data['description1'];
+        $products->description2 = $data['description2'];
+        $products->category = $data['category'];
+        $products->code = $data['code'];
+        $products->photos = $data['product']->getClientOriginalName();
+
         try {
+            $request->file('product')->storeAs('public/images/products',$data['product']);
             $products->save();
-            $msgSuccess = 'Post product success';
-            return back()
+            $msgSuccess = 'Add product success';
+            return redirect()
+                ->route('products.index')
                 ->with('success',$msgSuccess);
         } catch (\Exception $e) {
             \Log::error($e);
         }
-        $msgFail = 'Post product failed';
+        $msgFail = 'Add product failed';
         return back()
             ->with('error',$msgFail);
 
@@ -153,6 +153,7 @@ class ProductsController extends Controller
         try
         {
             $product->delete();
+            Storage::delete('public/images/products/'.$product->name);
             $success = 'Delete product success';
             return redirect()->route('products.index')
                 ->with('success',$success);

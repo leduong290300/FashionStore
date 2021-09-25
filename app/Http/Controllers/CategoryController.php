@@ -47,7 +47,7 @@ class CategoryController extends Controller
         {
             $categories->save();
             $success = 'Post category success';
-            return redirect()->route('categories.create')
+            return redirect()->route('categories.index')
                 ->with('success',$success);
         }
         catch (\Exception $e)
@@ -55,9 +55,8 @@ class CategoryController extends Controller
             \Log::error($e);
             $error = 'Post category fail';
         }
-        return redirect()->route('categories.create')
+        return back()
             ->with('error',$error);
-        return back();
     }
 
     /**

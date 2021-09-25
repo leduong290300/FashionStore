@@ -39,17 +39,15 @@ class PhotoBannerController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->file('banner')->getClientOriginalName();
-        $size = $request->file('banner')->getSize();
-        $type = $request->file('banner')->getMimeType();
+        $data = $request->all();
         $banners = new PhotoBanners();
-        $banners->name = $name;
-        $banners->size = $size;
-        $banners->type = $type;
+        $banners->name = $data['banner']->getClientOriginalName();
+        $banners->size = $data['banner']->getSize();
+        $banners->type = $data['banner']->getMimeType();
         try
         {
             $banners->save();
-            $request->file('banner')->storeAs('public/images/banner',$name);
+            $request->file('banner')->storeAs('public/images/banner',$data['banner']->getClientOriginalName());
             $success = 'Post banner success';
             return redirect()->route('banner.index')
                 ->with('success',$success);
@@ -59,9 +57,7 @@ class PhotoBannerController extends Controller
             \Log::error($e);
             $error = 'Post banner fail';
         }
-        return redirect()->route('banner.index')
-            ->with('error',$error);
-        return back();
+        return back()->with('error',$error);
     }
 
     /**

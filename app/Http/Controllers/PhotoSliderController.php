@@ -33,57 +33,29 @@ class PhotoSliderController extends Controller {
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request) {
+        $data = $request->all();
+        $slider = new PhotoSliders();
+        $slider->title = $data['title'];
+        $slider->description = $data['description'];
+        $slider->name = $data['name']->getClientOriginalName();
+        $slider->size = $data['slider']->getSize();
+        $slider->type = $data['slider']->getMimeType();
 
-		if($request->hasFile('upload')) {
-            //get filename with extension
-            $filenamewithextension = $request->file('upload')->getClientOriginalName();
-       
-            //get filename without extension
-            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-       
-            //get file extension
-            $extension = $request->file('upload')->getClientOriginalExtension();
-       
-            //filename to store
-            $filenametostore = $filename.'_'.time().'.'.$extension;
-       
-            //Upload File
-            $request->file('upload')->storeAs('public/images/slider', $filenametostore);
-  
-            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('storage/images/slider/'.$filenametostore);
-            $msg = 'Image successfully uploaded';
-            echo "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-            
-        }
-
-//        $file = $request->hasFile('slider');
-		//        dd($file);
-		//        $title = $request->title;
-		//        $description = $request->description;
-		//        $size = $request->file('slider')->getSize();
-		//        $type = $request->file('slider')->getMimeType();
-		//        $nameImg = $request->file('slider')->getClientOriginalName();
-		//        $request->file('slider')->storeAs('public/images/slider',$nameImg);
-		//        $slider = new PhotoSliders();
-		//        $slider->name = $nameImg;
-		//        $slider->title = $title;
-		//        $slider->description = $description;
-		//        $slider->size = $size;
-		//        $slider->type = $type;
-		//        try
-		//        {
-		//            $success = 'Add slider success';
-		//            $slider->save();
-		//            return back()->with('success',$success);
-		//        }
-		//        catch (\Exception $e)
-		//        {
-		//         \Log::error($e);
-		//         $error = 'Add slider fail';
-		//        }
-		//        return back()->with('error',$error);
-
+		try
+		{
+            $request->file('slider')->storeAs('public/images/slider', $data['name']);
+			$success = 'Post slider success';
+			$slider->save();
+			return redirect()
+                ->route('slider.index')
+                ->with('success',$success);
+		}
+		catch (\Exception $e)
+		{
+		\Log::error($e);
+		$error = 'Post slider failed';
+		}
+		return back()->with('error',$error);
 	}
 
 	/**

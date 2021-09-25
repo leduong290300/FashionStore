@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ShopController;
-
+use App\Http\Controllers\Upload\PhotoProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +27,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 //Category
 Route::resource('categories', CategoryController::class);
 
-//Slider
+//Slider content
 Route::resource('slider', PhotoSliderController::class);
 
 //Banner
@@ -52,6 +52,9 @@ Route::post('/account', [RegisterController::class, 'register'])->name('register
 
 //Logout
 Route::post('/account/logout', [LogoutController::class, 'logout'])->name('logout');
+
+//Upload photo product
+Route::post('/upload/photo_product',[PhotoProductController::class,'uploadPhotoProduct'])->name('upload_photo');
 
 Route::get('/about', function () {
 	return view('pages.about');
