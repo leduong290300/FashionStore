@@ -17,12 +17,6 @@
                     <span class="nav-link-text">Pages</span>
                 </a>
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                <a class="nav-link" href="{{route('categories.index')}}">
-                    <i class="fa fa-fw fa-table"></i>
-                    <span class="nav-link-text">Category</span>
-                </a>
-            </li>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-cog"></i>
@@ -36,10 +30,16 @@
                         <a href="{{route('products.index')}}">Products</a>
                     </li>
                     <li>
-                        <a href="{{route('slider.index')}}">Photo Sliders</a>
+                        <a href="{{route('slider.index')}}">Sliders</a>
                     </li>
                     <li>
-                        <a href="{{route('banner.index')}}">Photo Banner</a>
+                        <a href="{{route('banner.index')}}">Banners</a>
+                    </li>
+                    <li>
+                        <a href="{{route('categories.index')}}">Category</a>
+                    </li>
+                    <li>
+                        <a>Order</a>
                     </li>
                 </ul>
             </li>
@@ -64,10 +64,10 @@
                 </a>
                 <ul class="sidenav-second-level collapse" id="collapseMulti">
                     <li>
-                        <a href="">Change Photo Slider</a>
+                        <a href="">History</a>
                     </li>
                     <li>
-                        <a href="">Change Photo Banner</a>
+                        <a href="">Backup data</a>
                     </li>
                 </ul>
             </li>

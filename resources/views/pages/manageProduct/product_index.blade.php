@@ -6,13 +6,11 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success display" role="alert">
-            {{session('success')}}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger display" role="alert">
-            {{session('error')}}
+        <div class="alert alert-success hidden" role="alert">
+            <div class="d-flex align-items-center justify-content-between">
+                {{session('success')}}
+                <i class="fa fa-close btn-hidden"></i>
+            </div>
         </div>
     @endif
     <div class="card mb-3">
@@ -25,17 +23,13 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th colspan="2" style="text-align: center">Name</th>
+                        <th>Code</th>
                         <th>Price</th>
                         <th>Size</th>
-                        <th>Color</th>
-                        <th>Quanlity</th>
-                        <th>Description 1</th>
-                        <th>Description 2</th>
                         <th>Category</th>
-                        <th>Code</th>
-                        <th>Image</th>
-                        <th>Action</th>
+                        <th>Quanlity</th>
+                        <th colspan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,39 +42,30 @@
                                 {{$product->name}}
                             </td>
                             <td>
+                                <div class="m-r-10">
+                                    <img src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}" class="rounded" width="45">
+                                </div>
+                            </td>
+                            <td>
+                                {{$product->code}}
+                            </td>
+                            <td>
                                 {{$product->price}}$
                             </td>
                             <td>
                                 {{$product->size}}
                             </td>
                             <td>
-                                {{$product->color}}
+                                {{$product->category}}
                             </td>
                             <td>
                                 {{$product->quanlity}}
                             </td>
                             <td>
-                                {{$product->description1}}
-                            </td>
-                            <td>
-                                {{$product->description2}}
-                            </td>
-                            <td>
-                                {{$product->category}}
-                            </td>
-                            <td>
-                                {{$product->code}}
-                            </td>
-                            <td>
-                                <div class="m-r-10">
-                                    <img src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}" class="rounded" width="45">
-                                </div>
-                            </td>
-                            <td>
                                 <a href="{{route('products.edit',['product' => $product])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
-                                        Update
+                                        Edit
                                     </button>
                                 </a>
                                 <button class="btn btn-danger confirm"
