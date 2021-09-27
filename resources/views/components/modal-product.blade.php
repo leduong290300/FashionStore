@@ -70,7 +70,7 @@
 
                                     <div class="size-204 respon6-next">
                                         <div class="rs1-select2 bor8 bg0">
-                                            <select class="js-select2" name="size">
+                                            <select class="js-select2 select-size" name="size">
                                                 <option>Choose an option</option>
                                                 @foreach(explode(',',$product->size) as $size)
                                                     <option value="{!!$size!!}"> Size {!!$size!!} <option>
@@ -88,10 +88,10 @@
 
                                     <div class="size-204 respon6-next">
                                         <div class="rs1-select2 bor8 bg0">
-                                            <select class="js-select2" name="color">
+                                            <select class="js-select2 select-color" name="color">
                                                 <option>Choose an option</option>
                                                 @foreach(explode(',',$product->color) as $color)
-                                                    <option value="{!!$color!!}">{!!$color!!}</option>
+                                                    <option  value="{!!$color!!}">{!!$color!!}</option>
                                                 @endforeach
                                             </select>
                                             <div class="dropDownSelect2"></div>
@@ -106,14 +106,18 @@
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
 
-                                            <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+                                            <input class="mtext-104 cl3 txt-center num-product select-quanlity" type="number" name="num-product" value="1">
 
                                             <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
 
-                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                        <button
+                                            class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                                            data-url="{{route('add_to_cart.store')}}"
+                                            data-id="{{$product->id}}"
+                                        >
                                             Add to cart
                                         </button>
                                     </div>

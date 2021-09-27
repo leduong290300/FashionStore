@@ -213,6 +213,39 @@
     });
 
     /*==================================================================
+    [Add To Cart ]*/
+    function addToCart(e) {
+        e.preventDefault()
+        let url = $(this).data('url')
+        let id = $(this).data('id')
+        let selectSize = $(this).parent().parent().parent().find('.select-size').val();
+        let selectColor = $(this).parent().parent().parent().find('.select-color').val();
+        let selectQuanlity = $(this).parent().parent().parent().find('.select-quanlity').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:url,
+            dataType:'json',
+            type :'post',
+            data : {
+                id:id,
+                size:selectSize,
+                color:selectColor,
+                selectQuanlity:selectQuanlity
+            },
+            success:function (data) {
+            },
+            error:function () {
+
+            }
+        })
+    }
+    $('.js-addcart-detail').on('click',addToCart)
+
+    /*==================================================================
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());

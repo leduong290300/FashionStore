@@ -1,5 +1,5 @@
 <div class="p-b-63">
-    <a href="{{route('blog_details')}}" class="hov-img0 how-pos5-parent">
+    <a href="{{route('blog.show',['blog'])}}" class="hov-img0 how-pos5-parent">
         <img src="{{url('/assets/images/blog-04.jpg')}}" alt="IMG-BLOG">
 
         <div class="flex-col-c-m size-123 bg9 how-pos5">
@@ -15,7 +15,7 @@
 
     <div class="p-t-32">
         <h4 class="p-b-15">
-            <a href="{{route('blog_details')}}" class="ltext-108 cl2 hov-cl1 trans-04">
+            <a href="{{route('blog.show',['blog'])}}" class="ltext-108 cl2 hov-cl1 trans-04">
                 8 Inspiring Ways to Wear Dresses in the Winter
             </a>
         </h4>

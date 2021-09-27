@@ -39,7 +39,7 @@
                         <a href="{{route('categories.index')}}">Category</a>
                     </li>
                     <li>
-                        <a>Order</a>
+                        <a href="{{route('order.index')}}">Order</a>
                     </li>
                 </ul>
             </li>

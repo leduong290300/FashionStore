@@ -2,7 +2,7 @@
 @section('page','Blog')
 @section('title_page','Blog')
 @section('breadcrumb')
-    <x-breadcrumb/>
+{{--    <x-breadcrumb :item="$item"/>--}}
 @endsection
 
 @section('content')

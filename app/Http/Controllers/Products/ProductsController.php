@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Products;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\Products;
@@ -9,12 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
-    protected $productModels;
-    public function __construct(Products $product)
-    {
-        $this->productModels = $product;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -84,10 +79,10 @@ class ProductsController extends Controller
     {
         $item = Products::all()->find($id);
         $categories = Categories::all();
-       return view('pages.shops_details',[
-           'item' => $item,
-           'categories' => $categories
-       ]);
+        return view('pages.shops_details',[
+            'item' => $item,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -132,7 +127,7 @@ class ProductsController extends Controller
             $product->save();
             $msgSuccess = 'Update product success';
             return redirect()->route('products.index')
-            ->with('success',$msgSuccess);
+                ->with('success',$msgSuccess);
         } catch (\Exception $e) {
             \Log::error($e);
         }

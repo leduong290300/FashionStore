@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Banner;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PhotoBanners;
 use Illuminate\Support\Facades\Storage;
 
-class PhotoBannerController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
