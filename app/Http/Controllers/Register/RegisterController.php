@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Register;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Models\AdminAccounts;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -33,7 +34,7 @@ class RegisterController extends Controller
 
         $validate = Validator::make($data,[$firstname,$lastname,$email,$password]);
         if($validate->fails()) {
-           return redirect()::back()->withInput()->withErrors($validate->errors());
+            return redirect()::back()->withInput()->withErrors($validate->errors());
         } else {
             $accounts = new AdminAccounts();
             $accounts->first_name = $firstname;

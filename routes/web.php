@@ -1,16 +1,23 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\PhotoBannerController;
-use App\Http\Controllers\PhotoSliderController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Shop\ShopController;
+use App\Http\Controllers\Blog\BlogController;
+use App\Http\Controllers\About\AboutController;
+use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\Products\ProductsController;
+use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Logout\LogoutController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Banner\BannerController;
+use App\Http\Controllers\Slider\SliderController;
+use App\Http\Controllers\Register\RegisterController;
+use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Upload\PhotoProductController;
+use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\YourCart\YourCartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,25 +29,41 @@ use App\Http\Controllers\Upload\PhotoProductController;
 |
  */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-
-//Category
-Route::resource('categories', CategoryController::class);
-
-//Slider content
-Route::resource('slider', PhotoSliderController::class);
-
-//Banner
-Route::resource('banner', PhotoBannerController::class);
-
-//Product
-Route::resource('products', ProductsController::class);
+//Home
+Route::get('/',[HomeController::class,'index'])->name('home');
 
 //Shop
 Route::get('/shops', [ShopController::class, 'index'])->name('shops');
 
+//Blog
+Route::resource('blog', BlogController::class);
+
+//About
+Route::get('/about',[AboutController::class,'index'])->name('about');
+
+//Contact
+Route::get('/contact', [ContactController::class,'index'])->name('contact');
+
+//Category
+Route::resource('categories', CategoryController::class);
+
+//Slider
+Route::resource('slider', SliderController::class);
+
+//Banner
+Route::resource('banner', BannerController::class);
+
+//Product
+Route::resource('products', ProductsController::class);
+
 //Search
 Route::get('/search', [SearchController::class, 'show'])->name('search');
+
+//Shopping cart
+Route::resource('your_cart',YourCartController::class);
+
+//Add to cart
+Route::resource('add_to_cart',CartController::class);
 
 //Login
 Route::get('/account', [LoginController::class, 'index'])->name('index');
@@ -53,33 +76,14 @@ Route::post('/account', [RegisterController::class, 'register'])->name('register
 //Logout
 Route::post('/account/logout', [LogoutController::class, 'logout'])->name('logout');
 
+//Dashboard
+Route::middleware('admin')->get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
+
 //Upload photo product
 Route::post('/upload/photo_product',[PhotoProductController::class,'uploadPhotoProduct'])->name('upload_photo');
 
-Route::get('/about', function () {
-	return view('pages.about');
-})->name('about');
+//Order
+Route::resource('order',OrderController::class);
 
-Route::get('/blog', function () {
-	return view('pages.blog');
-})->name('blog');
 
-Route::get('/blog_details', function () {
-	return view('pages.blog_details');
-})->name('blog_details');
 
-Route::get('/contact', function () {
-	return view('pages.contact');
-})->name('contact');
-
-Route::get('/shops_details', function () {
-	return view('pages.shops_details');
-})->name('shops_details');
-
-Route::get('/shoping_cart', function () {
-	return view('pages.shoping_cart');
-})->name('shoping_cart');
-
-Route::get('/dashboard', function () {
-	return view('dashboard');
-})->name('dashboard')->middleware('admin');

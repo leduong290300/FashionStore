@@ -19,10 +19,11 @@
                     <tr>
                         <th>#</th>
                         <th>Image</th>
-                        <th>Product Name</th>
-                        <th>Product Id</th>
+                        <th>Name</th>
+                        <th>Size</th>
                         <th>Quanlity</th>
-                        <th>Price</th>
+                        <th>Color</th>
+                        <th>Total</th>
                         <th>Order Time</th>
                         <th>Customer</th>
                         <th>Status</th>
@@ -44,6 +45,9 @@
                         </td>
                         <td>
                             20
+                        </td>
+                        <td>
+                            $80
                         </td>
                         <td>
                             $80

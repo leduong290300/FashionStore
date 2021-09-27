@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Category;
 
-use App\Models\Products;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Products;
 use App\Models\Categories;
 
 class CategoryController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -67,14 +69,14 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-          $categories = Categories::all();
-          $products = Products::where('category',$id)
-              ->orderBy('price','DESC')
-              ->get();
-            return view('pages.shops',[
-                'products' => $products,
-                'categories' => $categories
-              ]);
+        $categories = Categories::all();
+        $products = Products::where('category',$id)
+            ->orderBy('price','DESC')
+            ->get();
+        return view('pages.shops',[
+            'products' => $products,
+            'categories' => $categories
+        ]);
 
     }
 

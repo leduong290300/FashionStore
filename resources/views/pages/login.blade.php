@@ -1,5 +1,5 @@
 @extends('layouts.form')
-@section('pages','Login Account')
+@section('pages','Login System')
 @section('content')
 <div class="card card-login mx-auto mt-5">
     <div class="card-header">Login</div>

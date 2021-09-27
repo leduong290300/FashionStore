@@ -7,7 +7,7 @@
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{url('/assets/images/icons/favicon.png')}}"/>
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{{url('/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url('/assets/vendor/bootstrap/css/bootstrap.css')}}">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{url('/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <!--===============================================================================================-->
@@ -34,6 +34,8 @@
     <link rel="stylesheet" type="text/css" href="{{url('/assets/css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('/assets/css/main.css')}}">
     <!--===============================================================================================-->
+    <!--Custom paginate css-->
+    <link href="{{url('/assets/css/pagination.css')}}" rel="stylesheet">
 </head>
 <body class="animsition">
 

@@ -14,68 +14,40 @@
 
         <div class="header-cart-content flex-w js-pscroll">
             <ul class="header-cart-wrapitem w-full">
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="{{url('/assets/images/item-cart-01.jpg')}}" alt="IMG">
-                    </div>
+                @php
+                $total = 0;
+                @endphp
+                @foreach(session()->get('cart') as $cart)
+                    @php
+                    $total += $cart['price']*$cart['quanlity'];
+                    @endphp
+                    <li class="header-cart-item flex-w flex-t m-b-12">
+                        <div class="header-cart-item-img">
+                            <img src="{{url('/assets/images/'.$cart['photo'])}}" alt="IMG">
+                        </div>
 
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            White Shirt Pleat
-                        </a>
+                        <div class="header-cart-item-txt p-t-8">
+                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                               {{$cart['name']}}
+                            </a>
 
-                        <span class="header-cart-item-info">
-								1 x $19.00
+                            <span class="header-cart-item-info">
+								{{$cart['quanlity']}} x {{number_format($cart['price'])}}$
 							</span>
-                    </div>
-                </li>
-
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="{{url('/assets/images/item-cart-02.jpg')}}" alt="IMG">
-                    </div>
-
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Converse All Star
-                        </a>
-
-                        <span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-                    </div>
-                </li>
-
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="{{url('/assets/images/item-cart-03.jpg')}}" alt="IMG">
-                    </div>
-
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Nixon Porter Leather
-                        </a>
-
-                        <span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-                    </div>
-                </li>
+                        </div>
+                    </li>
+                @endforeach
             </ul>
 
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
-                    Total: $75.00
+                    Total: {{number_format($total)}}$
                 </div>
 
                 <div class="header-cart-buttons flex-w w-full">
-                    <a href="{{route('shoping_cart')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+                    <a href="{{route('your_cart.index')}}" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         View Cart
                     </a>
-
-{{--                    <a href="" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">--}}
-{{--                        Check Out--}}
-{{--                    </a>--}}
                 </div>
             </div>
         </div>
