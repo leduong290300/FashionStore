@@ -17,7 +17,9 @@ class CartController extends Controller
         $product = Products::find($id);
         $cart = session()->get('cart');
         if( isset($cart[$id]) ) {
-            $cart[$id]['quanlity'] = $cart[$id]['quanlity'] +1 ;
+            $cart[$id]['quanlity'] += $selectQuanlity;
+            $cart[$id]['size'] = $cart[$id]['size'].' , '.$size ;
+            $cart[$id]['color'] = $cart[$id]['color'].' , '.$color ;
         } else {
             $cart[$id] = [
                 'name' => $product->name,
@@ -29,5 +31,36 @@ class CartController extends Controller
             ];
         }
         session()->put('cart',$cart);
+        return response()->json([
+            'status' => 200,
+            'success' => 'success'
+        ],200);
+    }
+
+    public function update (Request $request,$id)
+    {
+
+        if($id && $request->quanlity) {
+            $cart = session()->get('cart');
+            $cart[$id]['quanlity'] += $request->quanlity;
+            session()->put('cart',$cart);
+        }
+        return response()->json([
+            'status' => 200,
+            'success' => 'success'
+        ]);
+    }
+
+    public function destroy ($id)
+    {
+        $cart = session()->get('cart');
+        if(isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart',$cart);
+        }
+        return response()->json([
+            'status' => 200,
+            'success' => 'Product removed successfully'
+        ],200);
     }
 }

@@ -236,7 +236,12 @@
                 color:selectColor,
                 selectQuanlity:selectQuanlity
             },
-            success:function (data) {
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
             },
             error:function () {
 
@@ -244,6 +249,90 @@
         })
     }
     $('.js-addcart-detail').on('click',addToCart)
+
+
+    /*==================================================================
+    [Update To Cart ]*/
+    $('.btn-plus').on('click',function() {
+        let url = $(this).data('url');
+        let id = $(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:url,
+            dataType:'json',
+            type:'put',
+            data : {
+                id : id,
+                quanlity:1
+            },
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
+            },
+            error:function () {
+            }
+        })
+    })
+    $('.btn-minus').on('click',function() {
+        let url = $(this).data('url');
+        let id = $(this).data('id');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:url,
+            dataType:'json',
+            type:'put',
+            data : {
+                id : id,
+                quanlity:-1
+            },
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
+            },
+            error:function () {
+            }
+        })
+    })
+    /*==================================================================
+    [Delete To Cart ]*/
+    function deleteToCart (e) {
+        e.preventDefault()
+        let url = $(this).data('url')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:url,
+            dataType:'json',
+            type:'delete',
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
+            },
+            error:function () {
+            }
+        })
+    }
+    $('.btn-delete-cart').on('click',deleteToCart)
 
     /*==================================================================
     [ +/- num product ]*/
