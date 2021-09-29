@@ -63,7 +63,7 @@ Route::get('/search', [SearchController::class, 'show'])->name('search');
 Route::resource('your_cart',YourCartController::class);
 
 //Add to cart
-Route::resource('add_to_cart',CartController::class);
+Route::resource('cart',CartController::class);
 
 //Login
 Route::get('/account', [LoginController::class, 'index'])->name('index');

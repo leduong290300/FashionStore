@@ -17,7 +17,8 @@
                 @php
                 $total = 0;
                 @endphp
-                @foreach(session()->get('cart') as $cart)
+                @if(session()->get('cart'))
+                @foreach(session()->get('cart') as $id => $cart)
                     @php
                     $total += $cart['price']*$cart['quanlity'];
                     @endphp
@@ -27,7 +28,7 @@
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">
-                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                            <a href="{{route('products.show',['product' => $id])}}" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
                                {{$cart['name']}}
                             </a>
 
@@ -36,9 +37,13 @@
 							</span>
                         </div>
                     </li>
-                @endforeach
-            </ul>
 
+                @endforeach
+                @endif
+            </ul>
+            @if(!session()->get('cart'))
+                <img class="card-img" src="{{url('/storage/images/cart_empty/4088f796052648dd835057b09d904711.png')}}" alt="">
+            @endif
             <div class="w-full">
                 <div class="header-cart-total w-full p-tb-40">
                     Total: {{number_format($total)}}$

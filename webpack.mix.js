@@ -16,4 +16,3 @@ mix.copyDirectory("resources/assets/fonts", "public/assets/fonts");
 mix.copyDirectory("resources/assets/images", "public/assets/images");
 mix.copyDirectory("resources/assets/js", "public/assets/js");
 mix.copyDirectory("resources/assets/vendor", "public/assets/vendor");
-mix.copyDirectory("resources/assets/ckfinder", "public/assets/ckfinder");

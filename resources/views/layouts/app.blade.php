@@ -4,6 +4,7 @@
     <title>{{config('app.name')}} | @yield('page')</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="{{url('/assets/images/icons/favicon.png')}}"/>
     <!--===============================================================================================-->
@@ -144,10 +145,16 @@
     $('.js-addcart-detail').each(function(){
         let nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
-            swal(nameProduct, "is added to cart !", "success");
+            swal(nameProduct, "is added to cart successfully!", "success");
         });
     });
-
+    /*---------------------------------------------*/
+    $('.btn-delete-cart').each(function(){
+        let name = $(this).parent().parent().parent().parent().find('.name').html();
+        $(this).on('click',function() {
+            swal(name,'removed from cart successfully','success');
+        })
+    })
 </script>
 <!--===============================================================================================-->
 <script src="{{url('/assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
@@ -168,6 +175,5 @@
 </script>
 <!--===============================================================================================-->
 <script src="{{url('/assets/js/main.js')}}"></script>
-
 </body>
 </html>
