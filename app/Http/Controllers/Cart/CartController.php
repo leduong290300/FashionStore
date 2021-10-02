@@ -39,16 +39,23 @@ class CartController extends Controller
 
     public function update (Request $request,$id)
     {
-
         if($id && $request->quanlity) {
             $cart = session()->get('cart');
             $cart[$id]['quanlity'] += $request->quanlity;
-            session()->put('cart',$cart);
         }
-        return response()->json([
-            'status' => 200,
-            'success' => 'success'
-        ]);
+        try {
+            session()->put('cart',$cart);
+            return response()->json([
+                'status' => 200,
+                'success' => 'success'
+            ],200);
+        } catch (\Exception $e) {
+            \Log::error($e);
+            return response()->json([
+                'status' => 400,
+                'error' => 'error'
+            ],200);
+        }
     }
 
     public function destroy ($id)

@@ -29,13 +29,13 @@
             <div class="form-group">
                 <label>Description 1</label>
                 <textarea rows="10" type="text" class="form-control" disabled>
-                    {{$product->description1}}
+                    {!! $product->description1 !!}
                 </textarea>
             </div>
             <div class="form-group">
                 <label>Description 2</label>
                 <textarea rows="10" type="text" class="form-control" disabled>
-                    {{$product->description2}}
+                     {!! $product->description2 !!}
                 </textarea>
             </div>
             <div class="form-group">

@@ -36,7 +36,7 @@
                                 @php
                                 $total += $cart['price'] * $cart['quanlity'];
                                 @endphp
-                                <tr class="table_row">
+                                <tr class="table_row order_id" data-id="{{$id}}">
                                     <td class="column-1">
                                         <div class="how-itemcart1">
                                             <img src="{{url('/assets/images/'.$cart['photo'])}}" alt="{{$cart['name']}}">
@@ -47,7 +47,7 @@
                                     <td class="column-4">
                                         <ul class="list-group">
                                             @foreach (explode(',',$cart['size']) as $size)
-                                                <li>{!! $size !!}</li>
+                                                <li class="size">{!! $size !!}</li>
                                             @endforeach
                                         </ul>
                                     </td>
@@ -60,12 +60,11 @@
                                     </td>
                                     <td class="column-4">
                                         <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+                                            <div class="btn-minus btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m"
+                                                 data-url="{{route('cart.update',['cart' => $id])}}"
+                                                 data-id="{{$id}}"
                                             >
-                                                <i class="btn-minus fs-16 zmdi zmdi-minus"
-                                                   data-url="{{route('cart.update',['cart' => $id])}}"
-                                                   data-id="{{$id}}"
-                                                ></i>
+                                                <i class="fs-16 zmdi zmdi-minus"></i>
                                             </div>
                                             <input
                                                 class="mtext-104 cl3 txt-center num-product"
@@ -74,12 +73,11 @@
                                                 value="{{$cart['quanlity']}}"
                                                 min="1">
 
-                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                            <div class="btn-plus btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
+                                                 data-url="{{route('cart.update',['cart' => $id])}}"
+                                                 data-id="{{$id}}"
                                             >
-                                                <i class="btn-plus fs-16 zmdi zmdi-plus"
-                                                   data-url="{{route('cart.update',['cart' => $id])}}"
-                                                   data-id="{{$id}}"
-                                                ></i>
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
                                             </div>
                                         </div>
                                     </td>
@@ -130,16 +128,19 @@
 
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Name..." class="form-control">
+                        <input type="text" placeholder="Name..." class="form-control user_name">
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Email..." class="form-control">
+                        <input type="text" placeholder="Email..." class="form-control user_email">
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Phone..." class="form-control">
+                        <input type="text" placeholder="Phone..." class="form-control user_phone">
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" name="" id="" rows="10" placeholder="Address..."></textarea>
+                        <textarea class="form-control user_address" rows="5" placeholder="Address..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control user_notice" rows="5" placeholder="Notice..."></textarea>
                     </div>
                     <div class="flex-w flex-r-m p-b-30">
                         <div class="size-203 flex-c-m respon6">
@@ -148,10 +149,10 @@
 
                         <div class="size-204 respon6-next">
                             <div class="rs1-select2 bor8 bg0">
-                                <select class="js-select2 select-color">
-                                    <option value="1">Day of week</option>
-                                    <option value="2">Business hours</option>
-                                    <option value="3">Weekend</option>
+                                <select class="js-select2 select-color user_select">
+                                    <option value="day_of_weak">Day of week</option>
+                                    <option value="business_hours">Business hours</option>
+                                    <option value="weekend">Weekend</option>
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
@@ -177,14 +178,17 @@
                             </span>
                         </div>
 
-                        <div class="size-209 p-t-1">
-                            <span class="mtext-110 cl2">
+                        <div class="size-209 p-t-1 ">
+                            <span class="mtext-110 cl2 user_total">
                                 {{number_format($total)}}$
                             </span>
                         </div>
                     </div>
 
-                    <button class="flex-c-m stext-101 cl0 size-101 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+                    <button
+                        class="flex-c-m stext-101 cl0 size-101 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer user_order"
+                        data-url="{{route('order.store')}}"
+                    >
                         Order
                     </button>
                 </div>

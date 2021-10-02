@@ -25,7 +25,13 @@
                            placeholder="Title"
                            id="title"
                            name="title"
+                           value="{{ old('title') }}"
                     >
+                    <small class="text-error ">
+                        @foreach ($errors->get('title') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <input type="text"
@@ -33,10 +39,21 @@
                            placeholder="Description"
                            id="description"
                            name="description"
+                           value="{{ old('description') }}"
                     >
+                    <small class="text-error ">
+                        @foreach ($errors->get('description') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
-                    <input type="file" class="form-control-file" name="slider">
+                    <input type="file" class="form-control-file" name="slider" value="{{ old('slider') }}">
+                        <small class="text-error ">
+                            @foreach ($errors->get('slider') as $message)
+                            {{$message}}
+                            @endforeach
+                        </small>
                 </div>
                 <button
                     class="btn btn-primary mt-4"

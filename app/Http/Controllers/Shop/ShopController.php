@@ -11,7 +11,7 @@ class ShopController extends Controller
 {
     public function index()
     {
-        $products = Products::paginate(2);
+        $products = Products::paginate(20);
         $categories = Categories::all();
         return view('pages.shops',[
             'products' => $products,
