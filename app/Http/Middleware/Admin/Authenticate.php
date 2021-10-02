@@ -15,9 +15,11 @@ class Authenticate
      * @param  \Closure  $next
      * @return mixed
      */
+    const GUARD_ADMIN = 'admin';
+
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check())
+        if(Auth::guard(self::GUARD_ADMIN)->check())
         {
             return $next($request);
         }

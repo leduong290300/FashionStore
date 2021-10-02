@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Slider;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SliderRequest;
 use Illuminate\Http\Request;
 use App\Models\PhotoSliders;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class SliderController extends Controller
 {
@@ -31,23 +33,36 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\SliderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        $data = $request->all();
-        $slider = new PhotoSliders();
-        $slider->title = $data['title'];
-        $slider->description = $data['description'];
-        $slider->name = $data['name']->getClientOriginalName();
-        $slider->size = $data['slider']->getSize();
-        $slider->type = $data['slider']->getMimeType();
-
-        try
+    public function store(SliderRequest $request) {
+        $data = $request->validated();
+        $title = $request->title;
+        $description = $request->description;
+        $slider = $request->file('slider')->getClientOriginalName();
+        $type = $request->file('slider')->getMimeType();
+        $size = $request->file('slider')->getSize();
+        $validate = Validator::make($data,[$title,$description,$slider,$type,$size]);
+        if($validate->fails()) {
+            return redirect()::back()->withInput()->withErrors($validate->errors());
+        } else {
+            $sliders = new PhotoSliders();
+            $sliders->title = $title;
+            $sliders->description = $description;
+            $sliders->name = $slider;
+            $sliders->size = $size;
+            $sliders->type = $type;
+            $sliders->save();
+            $request->file('slider')->storeAs('public/images/slider',$slider);
+            return back();
+        }
+       /* try
         {
-            $request->file('slider')->storeAs('public/images/slider', $data['name']);
+            $sliders->save();
+            $request->file('slider')->storeAs('public/images/slider',$data['slider']->getClientOriginalName());
             $success = 'Post slider success';
-            $slider->save();
+
             return redirect()
                 ->route('slider.index')
                 ->with('success',$success);
@@ -57,7 +72,7 @@ class SliderController extends Controller
             \Log::error($e);
             $error = 'Post slider failed';
         }
-        return back()->with('error',$error);
+        return back()->with('error',$error);*/
     }
 
     /**

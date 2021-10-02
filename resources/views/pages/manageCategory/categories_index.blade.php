@@ -5,10 +5,12 @@
 
 @section('content')
     @if (session('success'))
-        <div class="alert alert-success hidden" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             <div class="d-flex align-items-center justify-content-between">
                 {{session('success')}}
-                <i class="fa fa-close btn-hidden"></i>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
     @endif

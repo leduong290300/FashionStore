@@ -54,7 +54,7 @@ class ProductsController extends Controller
         $products->photos = $data['product']->getClientOriginalName();
 
         try {
-            $request->file('product')->storeAs('public/images/products',$data['product']);
+            $request->file('product')->storeAs('public/images/products',$data['product']->getClientOriginalName());
             $products->save();
             $msgSuccess = 'Add product success';
             return redirect()
@@ -144,7 +144,7 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        $product = Products::findOrFail($id);
+        $product = Products::find($id);
         try
         {
             $product->delete();

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginAccountRequest;
 use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     public function index()
@@ -12,17 +13,22 @@ class LoginController extends Controller
         return view('pages.login');
     }
 
-    //Login form
-    public function login(Request $request)
-    {
-        $valiDate = $request->validate([
-            'email' => ['required','email','max:100'],
-            'password' => ['required','between:8,32']
-        ]);
+    const ALL_GUARD = ['admin'];
 
-        if(Auth::attempt($valiDate)) {
-            $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+    public function guard()
+    {
+        return Auth::guard('admin');
+    }
+    //Login form
+    public function login(LoginAccountRequest $request)
+    {
+        $data = $request->validated();
+
+        foreach (self::ALL_GUARD as $guard) {
+            if(Auth::guard($guard)->attempt($data)) {
+                $request->session()->regenerate();
+                return redirect()->intended('dashboard');
+            }
         }
         return back();
     }

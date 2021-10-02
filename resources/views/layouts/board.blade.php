@@ -60,10 +60,6 @@
     {{-- Handle modal --}}
     <script src='{{url('/assets/js/handle_modal.js')}}'></script>
     @yield('scripts')
-    {{--Handle alert--}}
-    <script src='{{url('/assets/js/handle_alert.js')}}'></script>
-    {{--Custom js--}}
-    <script src="{{url('/assets/js/handle_board.js')}}"></script>
 </div>
 </body>
 </html>

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Register;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdminAccounts;
-use Illuminate\Http\Request;
+use App\Http\Requests\RegisterAccountRequest;
+use App\Models\Admins;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -16,16 +16,10 @@ class RegisterController extends Controller
     }
 
     //Register form
-    public function register(Request $request)
+    public function register(RegisterAccountRequest $request)
     {
         //Validate data form
-        $data = $request->validate([
-            'first_name' => ['required','max:50'],
-            'last_name' => ['required','max:50'],
-            'email' => ['required','email','max:100'],
-            'password' => ['required','confirmed','between:8,32'],
-            'password_confirmation' => ['required']
-        ]);
+        $data = $request->validated();
 
         $firstname = $request->input('first_name');
         $lastname = $request->input('last_name');
@@ -36,7 +30,7 @@ class RegisterController extends Controller
         if($validate->fails()) {
             return redirect()::back()->withInput()->withErrors($validate->errors());
         } else {
-            $accounts = new AdminAccounts();
+            $accounts = new Admins();
             $accounts->first_name = $firstname;
             $accounts->last_name = $lastname;
             $accounts->email = $email;
