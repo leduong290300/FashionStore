@@ -12,7 +12,7 @@
 <hr>
 
 ## Technology 
-+) Front-end:HTML,CSS,JAVASCRIPt <br>
++) Front-end:HTML,CSS,JAVASCRIPT <br>
 +)Lib:JQUERY,JQUERYUI,SLICK,SWEETALERT,SELECT2,LIGHTBOX2,...<br>
 +)Back-end:LARAVEL(8X) <br>
 +)Database:MYSQL

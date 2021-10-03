@@ -67,8 +67,8 @@
                 <button class="btn btn-primary btn-block" type="submit">Register</button>
             </form>
             <div class="text-center">
-                <a class="d-block small mt-3" href="{{route('index')}}">Login Page</a>
-                <a class="d-block small" href="">Forgot Password?</a>
+                <a class="d-block small mt-3" href="{{route('index')}}">Login</a>
+                <a class="d-block small" href="{{route('forgot_password.get')}}">Forgot Password?</a>
             </div>
         </div>
 @endsection

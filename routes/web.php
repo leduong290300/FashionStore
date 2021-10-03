@@ -9,6 +9,8 @@ use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Logout\LogoutController;
+use App\Http\Controllers\ForgotPassword\ForgotPasswordController;
+use App\Http\Controllers\ResetPassword\ResertPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Slider\SliderController;
@@ -75,6 +77,14 @@ Route::post('/account', [RegisterController::class, 'register'])->name('register
 
 //Logout
 Route::post('/account/logout', [LogoutController::class, 'logout'])->name('logout');
+
+//Forgot Password
+Route::get('/forgot_password',[ForgotPasswordController::class,'showFormForgotPassword'])->name('forgot_password.get');
+Route::post('/forgot_password',[ForgotPasswordController::class,'submitFormForgotPassword'])->name('forgot_password.post');
+
+//Reset passsword
+Route::get('/reset_password/{token}',[ResertPasswordController::class,'showFormResetPassword'])->name('reset_password.get');
+Route::post('/reset_password',[ResertPasswordController::class,'submitFormResetPassword'])->name('reset_password.post');
 
 //Dashboard
 Route::middleware('admin')->get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
