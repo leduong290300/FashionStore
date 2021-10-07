@@ -4,11 +4,11 @@
 @endsection
 @section('content')
     @if (session('error'))
-        <div class="alert alert-danger hidden" role="alert">
-            <div class="d-flex align-items-center justify-content-between">
-                {{session('error')}}
-                <i class="fa fa-close btn-hidden"></i>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{session('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
     <div class="card">
@@ -20,27 +20,66 @@
             <form method="POST" action="{{route('products.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Name" name="name">
+                    <input type="text" class="form-control" placeholder="Name" name="name" value="{{old('name')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('name') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Price" name="price">
+                    <input type="text" class="form-control" placeholder="Price" name="price" value="{{old('price')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('price') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Size" name="size">
+                    <input type="text" class="form-control" placeholder="Size" name="size" value="{{old('size')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('size') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Color" name="color">
+                    <input type="text" class="form-control" placeholder="Color" name="color" value="{{old('color')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('color') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Quanlity" name="quanlity">
+                    <input type="text" class="form-control" placeholder="Inventory" name="inventory" value="{{old('inventory')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('inventory') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Description long</label>
-                    <textarea id="descriptionProduct1" rows="10" class="form-control" name="description1"></textarea>
+                    <textarea id="descriptionProduct1" rows="10" class="form-control" name="description_long">
+                        {{old('description_long')}}
+                    </textarea>
+                    <small class="text-error ">
+                        @foreach ($errors->get('description_long') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Description short</label>
-                    <textarea id="descriptionProduct2" rows="10" class="form-control" name="description2"></textarea>
+                    <textarea id="descriptionProduct2" rows="10" class="form-control" name="description_short">
+                         {{old('description_short')}}
+                    </textarea>
+                    <small class="text-error ">
+                        @foreach ($errors->get('description_short') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="col-auto mb-4">
                     <label class="mr-sm-2" for="inlineFormCustomSelect">Category</label>
@@ -49,14 +88,30 @@
                         @foreach($categories as $category)
                             <option  value="{!!$category->name!!}">{{ucfirst(trans($category->name))}}</option>
                         @endforeach
+                        <small class="text-error ">
+                            @foreach ($errors->get('category') as $message)
+                                {{$message}}
+                            @endforeach
+                        </small>
                     </select>
+
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Code" name="code">
+                    <input type="text" class="form-control" placeholder="Code" name="code" value="{{old('code')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('code') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Photo Product</label>
-                    <input type="file" class="form-control-file" name="product">
+                    <input type="file" class="form-control-file" name="product" value="{{old('product')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('product') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i>

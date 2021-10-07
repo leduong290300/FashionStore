@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Slider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginAccountRequest extends FormRequest
+class SliderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,9 @@ class LoginAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','email','max:100'],
-            'password' => ['required','between:8,32']
+            'title' => ['required','max:255'],
+            'description' => ['required','max:255'],
+            'slider' => ['required','mimes:png,jpg','max:2000']
         ];
     }
 }

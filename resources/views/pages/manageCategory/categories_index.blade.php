@@ -26,6 +26,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Title</th>
+                        <th>Image</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -40,10 +41,17 @@
                                 {{$category->title}}
                             </td>
                             <td>
+                                <div class="m-r-10">
+                                    <img src="{{asset('storage/images/banner/'.$category->image)}}"
+                                         alt="{{$category->image}}"
+                                         class="rounded" width="80">
+                                </div>
+                            </td>
+                            <td>
                                 <a href="{{route('categories.edit',['category' => $category])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
-                                        Update
+                                        Edit
                                     </button>
                                 </a>
                                 <button class="btn btn-danger confirm"

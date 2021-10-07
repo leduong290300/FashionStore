@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Products\ProductsRequest;
 use App\Models\Categories;
 use App\Models\Products;
 use Illuminate\Support\Facades\Storage;
@@ -35,38 +35,38 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Products\ProductsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
+        $productImg = time().'_'.$data['product']->getClientOriginalName();
+        $values = [
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'size' => $data['size'],
+            'color' => $data['color'],
+            'inventory' => $data['inventory'],
+            'description_long' => $data['description_long'],
+            'description_short' => $data['description_short'],
+            'category' => $data['category'],
+            'code' => $data['code'],
+            'photos' => $productImg
+        ];
         $products = new Products();
-        $products->name = $data['name'];
-        $products->price = $data['price'];
-        $products->size = $data['size'];
-        $products->color = $data['color'];
-        $products->quanlity = $data['quanlity'];
-        $products->description1 = $data['description1'];
-        $products->description2 = $data['description2'];
-        $products->category = $data['category'];
-        $products->code = $data['code'];
-        $products->photos = $data['product']->getClientOriginalName();
-
         try {
-            $request->file('product')->storeAs('public/images/products',$data['product']->getClientOriginalName());
-            $products->save();
-            $msgSuccess = 'Add product success';
+            $products->create($values);
+            $data['product']->storeAs('public/images/products', $productImg);
+            $success = 'Add products success';
             return redirect()
                 ->route('products.index')
-                ->with('success',$msgSuccess);
+                ->with('success',$success);
         } catch (\Exception $e) {
             \Log::error($e);
+            $error = 'Add products failed';
         }
-        $msgFail = 'Add product failed';
-        return back()
-            ->with('error',$msgFail);
-
+        return back()->with('error',$error);
     }
 
     /**
@@ -104,36 +104,41 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Products\ProductsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductsRequest $request, $id)
     {
-        $image = $request->file('product')->getClientOriginalName();
-        $request->file('product')->storeAs('public/images/products',$image);
-        $product = Products::findOrFail($id);
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->size = $request->size;
-        $product->color = $request->color;
-        $product->quanlity = $request->quanlity;
-        $product->description1 = $request->description1;
-        $product->description2 = $request->description2;
-        $product->category = $request->category;
-        $product->photos = $image;
-        $product->code = $request->code;
+        $data = $request->validated();
+        $productUpdate = Products::findOrFail($id);
+        $productImgNew = time().'_'.$data['product']->getClientOriginalName();
+        $productImgOld = Storage::files('public/images/products',$productUpdate->photos);
+        $values = [
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'size' => $data['size'],
+            'color' => $data['color'],
+            'inventory' => $data['inventory'],
+            'description_long' => $data['description_long'],
+            'description_short' => $data['description_short'],
+            'category' => $data['category'],
+            'code' => $data['code'],
+            'photos' => $productImgNew
+        ];
         try {
-            $product->save();
-            $msgSuccess = 'Update product success';
-            return redirect()->route('products.index')
-                ->with('success',$msgSuccess);
+            $productUpdate->update($values);
+            $success = 'Update products success';
+            $data['product']->storeAs('public/images/products', $productImgNew);
+            Storage::delete($productImgOld);
+            return redirect()
+                ->route('products.index')
+                ->with('success',$success);
         } catch (\Exception $e) {
             \Log::error($e);
+            $error = 'Update product failed';
+            return back()->with('error',$error);
         }
-        $msgFail = 'Update product failed';
-        return redirect()->route('products.index')
-            ->with('error',$msgFail);
     }
 
     /**
@@ -148,17 +153,19 @@ class ProductsController extends Controller
         try
         {
             $product->delete();
-            Storage::delete('public/images/products/'.$product->name);
+            if(Storage::exists('public/images/products/'.$product->photos)) {
+                Storage::delete('public/images/products/'.$product->photos);
+            }
             $success = 'Delete product success';
-            return redirect()->route('products.index')
+            return redirect()
+                ->route('products.index')
                 ->with('success',$success);
-        } catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             \Log::error($e);
-            $error = 'Delete product fail';
+            $error = 'Delete product failed';
+            return back()->with('error',$error);
         }
-        return redirect()->route('products.index')
-            ->with('error',$error);
+
 
     }
 }

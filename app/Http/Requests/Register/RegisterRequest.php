@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Register;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterAccountRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class RegisterAccountRequest extends FormRequest
         return [
             'first_name' => ['required','max:50'],
             'last_name' => ['required','max:50'],
-            'email' => ['required','email','max:100'],
+            'email' => ['required','email','max:100','regex:/(.*)@gmail\.com/i'],
             'password' => ['required','confirmed','between:8,32'],
             'password_confirmation' => ['required']
         ];

@@ -28,7 +28,7 @@
                         <th>Price</th>
                         <th>Size</th>
                         <th>Category</th>
-                        <th>Quanlity</th>
+                        <th>Inventory</th>
                         <th colspan="2">Action</th>
                     </tr>
                     </thead>
@@ -59,7 +59,7 @@
                                 {{$product->category}}
                             </td>
                             <td>
-                                {{$product->quanlity}}
+                                {{$product->inventory}}
                             </td>
                             <td>
                                 <a href="{{route('products.edit',['product' => $product])}}">

@@ -9,10 +9,9 @@ class Categories extends Model
 {
     use HasFactory;
 
-    public function getBanner()
-    {
-        return $this->hasOne(PhotoBanners::class,'id');
-    }
+    protected $fillable = [
+        'name','title','image'
+    ];
 
     public function getProduct()
     {

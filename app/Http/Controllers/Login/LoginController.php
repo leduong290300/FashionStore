@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Login;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginAccountRequest;
+use App\Http\Requests\Login\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -20,10 +20,9 @@ class LoginController extends Controller
         return Auth::guard('admin');
     }
     //Login form
-    public function login(LoginAccountRequest $request)
+    public function login(LoginRequest $request)
     {
         $data = $request->validated();
-
         foreach (self::ALL_GUARD as $guard) {
             if(Auth::guard($guard)->attempt($data)) {
                 $request->session()->regenerate();

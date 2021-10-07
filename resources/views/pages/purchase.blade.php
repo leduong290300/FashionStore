@@ -4,14 +4,8 @@
 @section('breadcrumb')
     {{--    <x-breadcrumb/>--}}
 @endsection
-
+@section('content')
 <form class="bg0 p-t-75 p-b-85">
-    @section('content')
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-lg-12 col-xl-12 m-lr-auto m-b-50">
@@ -39,18 +33,13 @@
                                 <td class="column-2 name">{{$product->name}}</td>
                                 <td class="column-3">{{$product->price}}$</td>
                                 <td class="column-4">
-                                    <select class="js-select2 select-size" name="size">
-                                        <option>Choose an option</option>
-                                        @foreach(explode(',',$product->size) as $size)
-                                            <option value="{!!$size!!}"> Size {!!$size!!} <option>
-                                        @endforeach
-                                    </select>
+                                    <ul class="list-group">
+                                        <li class="size">{!! $data->size !!}</li>
+                                    </ul>
                                 </td>
                                 <td class="column-4">
                                     <ul class="list-group">
-                                        {{--@foreach (explode(',',$cart['color']) as $color)
-                                            <li>{!! $color !!}</li>
-                                        @endforeach--}}
+                                        <li class="size">{!! $data->color !!}</li>
                                     </ul>
                                 </td>
                                 <td class="column-4">
@@ -65,7 +54,7 @@
                                             class="mtext-104 cl3 txt-center num-product"
                                             type="number"
                                             name="num-product1"
-                                            value="{{--{{$cart['quanlity']}}--}}"
+                                            value="{{$data->selectQuanlity}}"
                                             min="1">
 
                                         <div class="btn-plus btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m"
@@ -139,7 +128,7 @@
 
                         <button
                             class="flex-c-m stext-101 cl0 size-101 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer user_order"
-                            data-url="{{route('order.store')}}"
+                            {{--data-url="{{route('order.store')}}"--}}
                         >
                             Order
                         </button>

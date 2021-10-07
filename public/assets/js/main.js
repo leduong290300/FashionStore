@@ -317,6 +317,33 @@
     $('.btn-delete-cart').on('click',deleteToCart)
 
     /*==================================================================
+    [Purchase Product With Id ]*/
+    function purchaseProduct () {
+        let url = $(this).data('url');
+        let id = $(this).data('id');
+        let selectSize = $(this).parent().parent().parent().find('.select-size').val();
+        let selectColor = $(this).parent().parent().parent().find('.select-color').val();
+        let selectQuanlity = $(this).parent().parent().parent().find('.select-quanlity').val();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url:url,
+            dataType:'json',
+            type:'post',
+            data : {
+                id : id,
+                size:selectSize,
+                color:selectColor,
+                selectQuanlity:selectQuanlity
+            }
+        })
+    }
+
+    $('.js-purchase').on('click',purchaseProduct)
+    /*==================================================================
     [ +/- num product ]*/
     $('.btn-num-product-down').on('click', function(){
         var numProduct = Number($(this).next().val());

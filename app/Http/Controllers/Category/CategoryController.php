@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Products;
 use App\Models\Categories;
-
+use App\Http\Requests\Categories\CategoriesRequest;
 class CategoryController extends Controller
 {
 
@@ -34,20 +34,22 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Categories\CategoriesRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        $name = $request->name;
-        $title = $request->title;
+        $data = $request->validated();
         $categories = new Categories();
-        $categories->name = $name;
-        $categories->title = $title;
-
+        $categoriesImg = time().'_'.$data['banner']->getClientOriginalName();
         try
         {
-            $categories->save();
+            $categories->create([
+                'title' => $data['title'],
+                'name' => $data['name'],
+                'image' => $categoriesImg
+            ]);
+            $data['banner']->storeAs('public/images/banner', $categoriesImg);
             $success = 'Post category success';
             return redirect()->route('categories.index')
                 ->with('success',$success);
@@ -96,21 +98,26 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Categories\CategoriesRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $id)
     {
+        $data = $request->validated();
         $category = Categories::findOrFail($id);
+        $categoriesImgNew = time().'_'.$data['banner']->getClientOriginalName();
+        $categoriesImgOld = Storage::files('public/images/banner',$category->image);
         try
         {
+            $category->update([
+                'title' => $data['title'],
+                'name' => $data['name'],
+                'image' => $categoriesImgNew
+            ]);
+            $data['banner']->storeAs('public/images/banner', $categoriesImgNew);
             $success = 'Update category success';
-            $nameNew = $request->input('name');
-            $titleNew = $request->input('title');
-            $category->name = $nameNew;
-            $category->title = $titleNew;
-            $category->save();
+            Storage::delete($categoriesImgOld);
             return redirect()->route('categories.index')
                 ->with('success',$success);
 
@@ -120,8 +127,7 @@ class CategoryController extends Controller
             \Log::error($e);
             $fail = 'Update category fail';
         }
-        return redirect()->route('categories.index')
-            ->with('error',$fail);
+        return back()->with('error',$fail);
     }
 
     /**
@@ -136,7 +142,9 @@ class CategoryController extends Controller
         try
         {
             $category->delete();
-
+            if(Storage::exists('public/images/banner/'.$category->image)) {
+                Storage::delete('public/images/banner/'.$category->image);
+            }
             $success = 'Delete category success';
             return redirect()->route('categories.index')
                 ->with('success',$success);
@@ -144,9 +152,8 @@ class CategoryController extends Controller
         catch (\Exception $e)
         {
             \Log::error($e);
-            $error = 'Delete category fail';
+            $error = 'Delete category failed';
         }
-        return redirect()->route('categories.index')
-            ->with('error',$error);
+        return back()->with('error',$error);
     }
 }

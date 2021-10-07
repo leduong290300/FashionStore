@@ -4,6 +4,16 @@
 @endsection
 @section('content')
     <h4>Edit Slider</h4>
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-center justify-content-between">
+                {{session('error')}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    @endif
     <div class="row g-2">
         <div class="col-lg-6">
             <div class="form-group">
@@ -29,17 +39,30 @@
                 <div class="form-group">
                     <label>Title</label>
                     <input type="text" class="form-control" placeholder="Enter title" name="title">
+                    <small class="text-error ">
+                        @foreach ($errors->get('title') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Description </label>
-                    <textarea rows="10" type="text" class="form-control" placeholder="Enter description" name="description">
-
-                    </textarea>
+                    <textarea rows="10" type="text" class="form-control" placeholder="Enter description" name="description"></textarea>
+                    <small class="text-error ">
+                        @foreach ($errors->get('description') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
 
                 <div class="form-group">
                     <label>Photo Slider</label>
                     <input type="file" class="form-control-file" name="slider">
+                    <small class="text-error ">
+                        @foreach ($errors->get('slider') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-upload"></i>
