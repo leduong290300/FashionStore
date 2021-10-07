@@ -61,7 +61,7 @@
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
-                        {!!$item->description2!!}
+                        {!!$item->description_short!!}
                     </p>
 
                     <!--  -->
@@ -122,6 +122,13 @@
                                 >
                                     Add to cart
                                 </button>
+
+                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 mt4 ml4 js-purchase"
+                                        data-id="{{$item->id}}"
+                                        data-url="{{route('submit_purchase_product')}}"
+                                >
+                                    Purchase
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -170,7 +177,7 @@
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
                             <p class="stext-102 cl6">
-                                {!!$item->description1!!}
+                                {!!$item->description_long!!}
                             </p>
                         </div>
                     </div>

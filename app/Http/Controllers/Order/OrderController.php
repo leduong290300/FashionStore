@@ -14,7 +14,7 @@ class OrderController extends Controller
         return view('pages.manageOrder.order_index');
     }
 
-    public function show($id)
+    /*public function show($id)
     {
         $product = Products::findOrFail($id);
         $categories = Categories::all();
@@ -27,5 +27,5 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         dd($request);
-    }
+    }*/
 }

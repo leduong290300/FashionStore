@@ -33,9 +33,6 @@
                         <a href="{{route('slider.index')}}">Sliders</a>
                     </li>
                     <li>
-                        <a href="{{route('banner.index')}}">Banners</a>
-                    </li>
-                    <li>
                         <a href="{{route('categories.index')}}">Category</a>
                     </li>
                     <li>

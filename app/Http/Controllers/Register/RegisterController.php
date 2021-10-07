@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Register;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterAccountRequest;
+use App\Http\Requests\Register\RegisterRequest;
 use App\Models\Admins;
-use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -16,27 +15,27 @@ class RegisterController extends Controller
     }
 
     //Register form
-    public function register(RegisterAccountRequest $request)
+    public function register(RegisterRequest $request)
     {
         //Validate data form
         $data = $request->validated();
-
-        $firstname = $request->input('first_name');
-        $lastname = $request->input('last_name');
-        $email = $request->input('email');
-        $password = $request->input('password');
-
-        $validate = Validator::make($data,[$firstname,$lastname,$email,$password]);
-        if($validate->fails()) {
-            return redirect()::back()->withInput()->withErrors($validate->errors());
-        } else {
-            $accounts = new Admins();
-            $accounts->first_name = $firstname;
-            $accounts->last_name = $lastname;
-            $accounts->email = $email;
-            $accounts->password = bcrypt($password);
-            $accounts->save();
-            return redirect()->route('index');
+        $accounts = new Admins();
+        $values = [
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password'])
+        ];
+        try {
+            $accounts->create($values);
+            $success = 'Create account successfully';
+            return redirect()
+                ->route('index')
+                ->with('success',$success);
+        } catch (\Exception $e) {
+            \Log::error($e);
+            $error = 'Create account failed';
         }
+        return back()->with('error',$error);
     }
 }

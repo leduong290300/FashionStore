@@ -4,11 +4,11 @@
 @endsection
 @section('content')
     @if (session('error'))
-        <div class="alert alert-danger hidden" role="alert">
-            <div class="d-flex align-items-center justify-content-between">
-                {{session('error')}}
-                <i class="fa fa-close btn-hidden"></i>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{session('error')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     @endif
     <div class="card">
@@ -21,11 +21,29 @@
                 @csrf
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" placeholder="Enter name" name="name">
+                    <input type="text" class="form-control" placeholder="Enter name" name="name" value="{{old('name')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('name') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <div class="form-group">
                     <label>Title</label>
-                    <input type="text" class="form-control" placeholder="Enter title" name="title">
+                    <input type="text" class="form-control" placeholder="Enter title" name="title" value="{{old('title')}}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('title') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
+                </div>
+                <div class="form-group">
+                    <input type="file" class="form-control-file" name="banner" value="{{ old('banner') }}">
+                    <small class="text-error ">
+                        @foreach ($errors->get('banner') as $message)
+                            {{$message}}
+                        @endforeach
+                    </small>
                 </div>
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-save"></i>

@@ -4,9 +4,8 @@
 @section('breadcrumb')
 {{--    <x-breadcrumb/>--}}
 @endsection
-
+@section('content')
 <form class="bg0 p-t-75 p-b-85">
-    @section('content')
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}

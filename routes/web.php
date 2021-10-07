@@ -12,7 +12,6 @@ use App\Http\Controllers\Logout\LogoutController;
 use App\Http\Controllers\ForgotPassword\ForgotPasswordController;
 use App\Http\Controllers\ResetPassword\ResertPasswordController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Slider\SliderController;
 use App\Http\Controllers\Register\RegisterController;
 use App\Http\Controllers\Search\SearchController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Upload\PhotoProductController;
 use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\YourCart\YourCartController;
+use App\Http\Controllers\Purchase\PurchaseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,8 +52,6 @@ Route::resource('categories', CategoryController::class);
 //Slider
 Route::resource('slider', SliderController::class);
 
-//Banner
-Route::resource('banner', BannerController::class);
 
 //Product
 Route::resource('products', ProductsController::class);
@@ -92,7 +90,10 @@ Route::middleware('admin')->get('/dashboard', [DashboardController::class,'index
 //Upload photo product
 Route::post('/upload/photo_product',[PhotoProductController::class,'uploadPhotoProduct'])->name('upload_photo');
 
-//Order
+//Purchase product
+Route::get('/purchase/{data}',[PurchaseController::class,'showFormPurchaseProduct'])->name('form_purchase_product');
+Route::post('/purchase',[PurchaseController::class,'submitPurchaseProduct'])->name('submit_purchase_product');
+
 Route::resource('order',OrderController::class);
 
 

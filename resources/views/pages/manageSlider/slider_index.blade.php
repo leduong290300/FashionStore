@@ -24,13 +24,10 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
-                        <th>Image</th>
+                        <th colspan="2" style="text-align: center">Slider</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Size</th>
-                        <th>Type</th>
-                        <th>Action</th>
+                        <th colspan="2">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -52,16 +49,10 @@
                                 {{$slider->description}}
                             </td>
                             <td>
-                                {{$slider->size}}KB
-                            </td>
-                            <td>
-                                {{$slider->type}}
-                            </td>
-                            <td>
                                 <a href="{{route('slider.edit',['slider' => $slider->id])}}">
                                     <button class="btn btn-success">
                                         <i class="fa fa-edit"></i>
-                                        Update
+                                        Edit
                                     </button>
                                 </a>
                                 <button
