@@ -24,7 +24,7 @@
                     @endphp
                     <li class="header-cart-item flex-w flex-t m-b-12">
                         <div class="header-cart-item-img">
-                            <img src="{{url('/assets/images/'.$cart['photo'])}}" alt="IMG">
+                            <img src="{{asset('/storage/images/products/'.$cart['photo'])}}" alt="IMG">
                         </div>
 
                         <div class="header-cart-item-txt p-t-8">

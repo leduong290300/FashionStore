@@ -27,57 +27,38 @@
                         <th>Order Time</th>
                         <th>Status</th>
                         <th>Address</th>
-                        <th>Total</th>
-                        <th colspan="2">Action</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-{{--                    @foreach($products as $product)--}}
-{{--                        <tr>--}}
-{{--                            <td>--}}
-{{--                                {{ $loop->iteration + ($products->currentPage()-1) * ($products->perPage()) }}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->name}}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                <div class="m-r-10">--}}
-{{--                                    <img src="{{asset('storage/images/products/'.$product->photos)}}" alt="{{$product->photos}}" class="rounded" width="45">--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->code}}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->price}}$--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->size}}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->category}}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                {{$product->quanlity}}--}}
-{{--                            </td>--}}
-{{--                            <td>--}}
-{{--                                <a href="">--}}
-{{--                                    <button class="btn btn-success">--}}
-{{--                                        <i class="fa fa-edit"></i>--}}
-{{--                                        Edit--}}
-{{--                                    </button>--}}
-{{--                                </a>--}}
-{{--                                <button class="btn btn-danger confirm"--}}
-{{--                                        data-toggle="modal"--}}
-{{--                                        data-target="#modalDelete"--}}
-{{--                                        data-url=""--}}
-{{--                                >--}}
-{{--                                    <i class="fa fa-remove"></i>--}}
-{{--                                    Delete--}}
-{{--                                </button>--}}
-{{--                            </td>--}}
-{{--                        </tr>--}}
-{{--                    @endforeach--}}
+                    @foreach($userPurchases as $userPurchase)
+                        <tr>
+                            <td>
+                                {{$userPurchase->id}}
+                            </td>
+                            <td>
+                                {{$userPurchase->name}}
+                            </td>
+                            <td>
+                                {{$userPurchase->created_at}}
+                            </td>
+                            <td>
+                                Pending
+                            </td>
+                            <td>
+                                {{$userPurchase->address}}
+                            </td>
+                            <td>
+                                <a href="{{route('order.show',['order' => $userPurchase])}}">
+                                    <button class="btn btn-success"
+                                    >
+                                        <i class="fa fa-eye"></i>
+                                        Show details
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

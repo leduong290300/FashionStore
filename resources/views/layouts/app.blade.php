@@ -142,12 +142,12 @@
 
     /*---------------------------------------------*/
 
-    $('.js-addcart-detail').each(function(){
+    /*$('.js-addcart-detail').each(function(){
         let nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
         $(this).on('click', function(){
             swal(nameProduct, "is added to cart successfully!", "success");
         });
-    });
+    });*/
     /*---------------------------------------------*/
     $('.btn-delete-cart').each(function(){
         let name = $(this).parent().parent().parent().parent().find('.name').html();

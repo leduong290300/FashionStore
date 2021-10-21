@@ -3320,3 +3320,7 @@ input.num-product::-webkit-inner-spin-button {
     }
 
 }
+.dropdown-toggle::after{
+  border-right: 0!important;
+  border-left: 0!important;
+}

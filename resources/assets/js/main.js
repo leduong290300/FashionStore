@@ -268,6 +268,13 @@
             data : {
                 id : id,
                 quanlity:1
+            },
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
             }
         })
     })
@@ -286,6 +293,13 @@
             data : {
                 id : id,
                 quanlity:-1
+            },
+            success:function (response) {
+                if(response.success) {
+                    setTimeout(function() {
+                        location.reload()
+                    },2000)
+                }
             }
         })
     })

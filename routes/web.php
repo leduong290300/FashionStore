@@ -90,9 +90,8 @@ Route::middleware('admin')->get('/dashboard', [DashboardController::class,'index
 //Upload photo product
 Route::post('/upload/photo_product',[PhotoProductController::class,'uploadPhotoProduct'])->name('upload_photo');
 
-//Purchase product
-Route::get('/purchase/{data}',[PurchaseController::class,'showFormPurchaseProduct'])->name('form_purchase_product');
-Route::post('/purchase',[PurchaseController::class,'submitPurchaseProduct'])->name('submit_purchase_product');
+//Purchase
+Route::post('/purchase',[PurchaseController::class,'purchaseProduct'])->name('purchase_product');
 
 Route::resource('order',OrderController::class);
 
